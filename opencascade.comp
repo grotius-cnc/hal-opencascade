@@ -1,0 +1,75 @@
+component opencascade "opencascade component";
+
+description 
+"""
+opencascade component
+
+Preprocess slogan examples :
+/opt/linuxcnc/bin/halcompile --preprocess /opt/linuxcnc/src/hal/components/opencascade.comp
+/opt/linuxcnc/bin/halcompile --preprocess /home/user/Desktop/Linux-Embedded/linux-hal/halcompile-opencascade/opencascade.comp
+
+Usage :
+
+This file can only be used for --preprocess purposes. Direct --compile will fail.
+The makefile uses the preproccesed .c and .o file to produce the .so library.
+
+Then in halview : loadrt opencascade
+
+""";
+ 
+author "Skynet 2021";
+
+license "GPLv2 or greater";
+
+option singleton yes;
+
+// *******************************************************
+// Template pins.
+// *******************************************************
+
+pin out bit testpin_bit_out			"testpin";
+pin in bit testpin_bit_in			"testpin";
+pin out float testpin_float_out		"testpin";
+pin in float testpin_float_in		"testpin";
+param rw float testparam			"testpin";
+
+function _;
+
+;;
+
+#include "rtapi_math.h"
+#include "kinematic.h"
+
+double ms;
+double seconds;
+double totalnsec;
+struct data d; // Component wide data bucket
+
+FUNCTION(_) {
+        totalnsec = totalnsec + period;
+        ms = totalnsec * 0.000001;          // rtapi_print_msg(RTAPI_MSG_ERR,"totalms: %f \n", totalms);
+        seconds = totalnsec * 0.000000001;  // rtapi_print_msg(RTAPI_MSG_ERR,"totalseconds: %f \n", totalseconds);
+        
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
